@@ -1,11 +1,11 @@
 pipeline{
     agent {
         kubernetes {
-            inheritFrom "kube-agent"
+            inheritFrom "nodejs"
         }
     }
     environment {
-        APP_NAME = "cd-pipeline"
+       APP_NAME_FRONTEND = "cicd-frontend"
     }
     stages {
         stage("Cleanup Workspace") {
@@ -15,7 +15,7 @@ pipeline{
         }
         stage("checkout from scm"){
             steps{
-                git branch: 'main', credentialsId: 'github', url: 'https://github.com/Nikhil007nsg/cd-pipeline'
+                git branch: 'main', credentialsId: 'github', url: 'https://github.com/Nikhil007nsg/cd-frontend'
                 
             } 
         }
@@ -37,7 +37,7 @@ pipeline{
                    git commit -m "Updated Deployment Manifest"
                 """
                 withCredentials([gitUsernamePassword(credentialsId: 'github', gitToolName: 'Default')]) {
-                  sh "git push https://github.com/Nikhil007nsg/cicd-pipeline main"
+                  sh "git push https://github.com/Nikhil007nsg/cicd-frontend main"
                 }
             }
         }
