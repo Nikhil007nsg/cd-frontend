@@ -27,13 +27,13 @@ spec:
               cpu: "2"
           ports:
             - containerPort: 3000
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-              - matchExpressions:
-                - key: kubernetes.io/hostname
-                  operator: In
-                  values:
-                    - vkyc-f8
+  #    affinity:
+   #     nodeAffinity:
+   #       requiredDuringSchedulingIgnoredDuringExecution:
+   #         nodeSelectorTerms:
+    #          - matchExpressions:
+     #           - key: kubernetes.io/hostname
+      #            operator: In
+       #           values:
+        #            - vkyc-f8
 
