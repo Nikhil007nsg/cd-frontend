@@ -21,22 +21,22 @@ pipeline{
         }
         stage("Update the Deployment Tags") {
             steps {
-                container('docker') {
+          //      container('docker') {
                 sh """
-                   cat deployment.yaml
-                   sed -i 's/${APP_NAME}.*/${APP_NAME}:${IMAGE_TAG}/g' deployment.yaml
-                   cat deployment.yaml
+                   cat frontend.yaml
+                   sed -i 's/${APP_NAME}.*/${APP_NAME}:${IMAGE_TAG}/g' frontend.yaml
+                   cat frontend.yaml
                 """
             }
         }
-        }
+      //  }
          stage("Push the changed deployment file to Git") {
             steps {
-                container('docker') { 
+            //    container('docker') { 
                 sh """
                    git config --global user.name "nikhil007nsg"
                    git config --global user.email "nikhil007nsg@gmail.com"
-                   git add deployment.yaml
+                   git add frontend.yaml
                    git commit -m "Updated Deployment Manifest"
                 """
                 withCredentials([gitUsernamePassword(credentialsId: 'github', gitToolName: 'Default')]) {
@@ -44,6 +44,6 @@ pipeline{
                 }
             }
         }
-         }
+      //   }
     }
 }
