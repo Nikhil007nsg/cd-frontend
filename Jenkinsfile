@@ -11,6 +11,14 @@ pipeline{
        APP_NAME_FRONTEND = "cicd-frontend"
     }
     stages {
+        stage("Prepare Environment") {
+            steps {
+                sh """
+                   apt-get update && apt-get install -y git
+                   git --version
+                """
+            }
+        } 
         stage("Cleanup Workspace") {
             steps {
                 cleanWs()
