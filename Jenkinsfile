@@ -4,6 +4,9 @@ pipeline{
             inheritFrom "nodejs"
         }
     }
+    tools {
+        git 'Default' // Ensure the Git tool is configured in Jenkins
+    }
     environment {
        APP_NAME_FRONTEND = "cicd-frontend"
     }
