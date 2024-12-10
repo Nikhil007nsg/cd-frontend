@@ -21,6 +21,7 @@ pipeline{
         }
         stage("Update the Deployment Tags") {
             steps {
+                container('docker') {
                 sh """
                    cat deployment.yaml
                    sed -i 's/${APP_NAME}.*/${APP_NAME}:${IMAGE_TAG}/g' deployment.yaml
@@ -28,8 +29,10 @@ pipeline{
                 """
             }
         }
+        }
          stage("Push the changed deployment file to Git") {
             steps {
+                container('docker') { 
                 sh """
                    git config --global user.name "nikhil007nsg"
                    git config --global user.email "nikhil007nsg@gmail.com"
@@ -41,6 +44,6 @@ pipeline{
                 }
             }
         }
-      
+         }
     }
 }
